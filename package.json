@@ -1,0 +1,37 @@
+{
+  "name": "google-speech",
+  "version": "1.0.0",
+  "description": "An OMS service to transcribe audio using Google's Speech to Text API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "commit": "npx git-cz",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oms-services/google-speech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oms-services/google-speech/issues"
+  },
+  "homepage": "https://github.com/oms-services/google-speech#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^3.4.0",
+    "body-parser": "1.19.0",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "3.0.2",
+    "nodemon": "1.19.4",
+    "standard": "14.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

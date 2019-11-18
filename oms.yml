@@ -1,0 +1,189 @@
+oms: 1
+
+info:
+  version: 1.0.0
+  title: Google Speech
+  description: Transcribe audio using Google's Speech to Text API
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+lifecycle:
+  startup:
+    command: ['node', '/app/src/index.js']
+
+health:
+  http:
+    path: /health
+    port: 8080
+
+actions:
+  transcribe:
+    help: Transcribe audio content to text.
+    http:
+      path: /transcribe
+      method: post
+      port: 8080
+    arguments:
+      url:
+        help: The URL to an audio file to transcribe.
+        type: string
+        required: false
+        default: LINEAR16
+        in: requestBody
+      encoding:
+        help: The audio file encoding.
+        type: string
+        required: false
+        default: LINEAR16
+        in: requestBody
+      sampleRateHertz:
+        help: The audio file sample rate.
+        type: int
+        required: false
+        default: 16000
+        in: requestBody
+      languageCode:
+        help:
+          The BCP-47 identifier for the spoken language in the audio file. These identifiers are typically of the form
+          language-region, where language refers to the primary language and region refers to the region (usually a country
+          or region identifier) of the particular dialect. For example, English may either be represented by American English
+          (en-US), or British English (en-GB).
+        type: enum
+        required: false
+        default: 'en-US'
+        in: requestBody
+        enum:
+          - af-ZA
+          - am-ET
+          - hy-AM
+          - az-AZ
+          - id-ID
+          - ms-MY
+          - bn-BD
+          - bn-IN
+          - ca-ES
+          - cs-CZ
+          - da-DK
+          - de-DE
+          - en-AU
+          - en-CA
+          - en-GH
+          - en-GB
+          - en-IN
+          - en-IE
+          - en-KE
+          - en-NZ
+          - en-NG
+          - en-PH
+          - en-SG
+          - en-ZA
+          - en-TZ
+          - en-US
+          - es-AR
+          - es-BO
+          - es-CL
+          - es-CO
+          - es-CR
+          - es-EC
+          - es-SV
+          - es-ES
+          - es-US
+          - es-GT
+          - es-HN
+          - es-MX
+          - es-NI
+          - es-PA
+          - es-PY
+          - es-PE
+          - es-PR
+          - es-DO
+          - es-UY
+          - es-VE
+          - eu-ES
+          - fil-PH
+          - fr-CA
+          - fr-FR
+          - gl-ES
+          - ka-GE
+          - gu-IN
+          - hr-HR
+          - zu-ZA
+          - is-IS
+          - it-IT
+          - jv-ID
+          - kn-IN
+          - km-KH
+          - lo-LA
+          - lv-LV
+          - lt-LT
+          - hu-HU
+          - ml-IN
+          - mr-IN
+          - nl-NL
+          - ne-NP
+          - nb-NO
+          - pl-PL
+          - pt-BR
+          - pt-PT
+          - ro-RO
+          - si-LK
+          - sk-SK
+          - sl-SI
+          - su-ID
+          - sw-TZ
+          - sw-KE
+          - fi-FI
+          - sv-SE
+          - ta-IN
+          - ta-SG
+          - ta-LK
+          - ta-MY
+          - te-IN
+          - vi-VN
+          - tr-TR
+          - ur-PK
+          - ur-IN
+          - el-GR
+          - bg-BG
+          - ru-RU
+          - sr-RS
+          - uk-UA
+          - he-IL
+          - ar-IL
+          - ar-JO
+          - ar-AE
+          - ar-BH
+          - ar-DZ
+          - ar-SA
+          - ar-IQ
+          - ar-KW
+          - ar-MA
+          - ar-TN
+          - ar-OM
+          - ar-PS
+          - ar-QA
+          - ar-LB
+          - ar-EG
+          - fa-IR
+          - hi-IN
+          - th-TH
+          - ko-KR
+          - zh-TW
+          - yue-Hant-HK
+          - ja-JP
+          - zh-HK
+          - zh
+    output:
+      contentType: application/json
+      type: map
+
+environment:
+  PROJECT_ID:
+    required: true
+    type: string
+    help: A Google Cloud "Project ID"
+  GOOGLE_APPLICATION_CREDENTIALS:
+    required: true
+    type: string
+    help: Base64 encoded contents of a Google Cloud Credentials JSON

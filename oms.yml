@@ -1,22 +1,24 @@
 oms: 1
-
 info:
   version: 1.0.0
   title: Google Speech
   description: Transcribe audio using Google's Speech to Text API
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
-
+    url: 'https://opensource.org/licenses/MIT'
+  contact:
+    name: Open Microservices
+    url: 'https://openmicroservices.org'
+    email: core@openmicroservices.org
 lifecycle:
   startup:
-    command: ['node', '/app/src/index.js']
-
+    command:
+      - node
+      - /app/src/index.js
 health:
   http:
     path: /health
     port: 8080
-
 actions:
   transcribe:
     help: Transcribe audio content to text.
@@ -44,14 +46,16 @@ actions:
         default: 16000
         in: requestBody
       languageCode:
-        help:
-          The BCP-47 identifier for the spoken language in the audio file. These identifiers are typically of the form
-          language-region, where language refers to the primary language and region refers to the region (usually a country
-          or region identifier) of the particular dialect. For example, English may either be represented by American English
+        help: >-
+          The BCP-47 identifier for the spoken language in the audio file. These
+          identifiers are typically of the form language-region, where language
+          refers to the primary language and region refers to the region
+          (usually a country or region identifier) of the particular dialect.
+          For example, English may either be represented by American English
           (en-US), or British English (en-GB).
         type: enum
         required: false
-        default: 'en-US'
+        default: en-US
         in: requestBody
         enum:
           - af-ZA
@@ -177,7 +181,6 @@ actions:
     output:
       contentType: application/json
       type: map
-
 environment:
   PROJECT_ID:
     required: true
